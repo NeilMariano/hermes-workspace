@@ -6,7 +6,7 @@ function workerBaseUrl() {
   if (explicit) return explicit.replace(/\/+$/, '')
   const statsUrl = (process.env.VITE_PLAYGROUND_STATS_URL || '').trim()
   if (statsUrl) return statsUrl.replace(/\/stats$/, '').replace(/\/+$/, '')
-  return 'https://hermes-playground-ws.myaurora-agi.workers.dev'
+  return ''
 }
 
 export const Route = createFileRoute('/api/playground-admin')({

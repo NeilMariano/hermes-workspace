@@ -174,7 +174,7 @@ export function usePlaygroundMultiplayer({
     const url =
       (window as any).__HERMES_PLAYGROUND_WS_URL ||
       ((import.meta as any).env?.VITE_PLAYGROUND_WS_URL as string | undefined) ||
-      'wss://hermes-playground-ws.myaurora-agi.workers.dev/playground'
+      ''
     // eslint-disable-next-line no-console
     console.log('[Hermes MP] connecting to WS:', url)
     if (!url) return
@@ -377,7 +377,7 @@ export function usePlaygroundMultiplayer({
     const baseUrl =
       (window as any).__HERMES_PLAYGROUND_HTTP_URL ||
       ((import.meta as any).env?.VITE_PLAYGROUND_STATS_URL as string | undefined)?.replace(/\/stats$/, '') ||
-      'https://hermes-playground-ws.myaurora-agi.workers.dev'
+      ''
     let stop = false
     let lastChatTs = 0
     const tick = async () => {
@@ -463,7 +463,7 @@ export function usePlaygroundMultiplayer({
     const baseUrl =
       (window as any).__HERMES_PLAYGROUND_HTTP_URL ||
       ((import.meta as any).env?.VITE_PLAYGROUND_STATS_URL as string | undefined)?.replace(/\/stats$/, '') ||
-      'https://hermes-playground-ws.myaurora-agi.workers.dev'
+      ''
     fetch(`${baseUrl}/chat`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },

@@ -1,0 +1,32 @@
+services:
+  hermes-agent:
+    profiles: ["bundled-agent"]
+
+  hermes-bridge:
+    image: hermes-workspace-local
+    pull_policy: never
+    init: true
+    entrypoint: ["node", "/bridge/bridge.js"]
+    user: "10010:10010"
+    read_only: true
+    cap_drop: ["ALL"]
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./bridge:/bridge:ro
+    restart: unless-stopped
+
+  hermes-workspace:
+    image: hermes-workspace-local
+    pull_policy: build
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on: !override
+      hermes-bridge:
+        condition: service_started
+    environment:
+      HERMES_API_URL: http://hermes-bridge:8642
+      HERMES_DASHBOARD_URL: http://hermes-bridge:9119
+    security_opt:
+      - no-new-privileges:true
